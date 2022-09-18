@@ -10,15 +10,9 @@ class LoadYaml:
         self.val_txt = data["DATASET"]["VAL"]
         self.train_txt = data["DATASET"]["TRAIN"]
         self.names = data["DATASET"]["NAMES"]
-
         self.learn_rate = data["TRAIN"]["LR"]
-        self.batch_size = data["TRAIN"]["BATCH_SIZE"]
         self.milestones = data["TRAIN"]["MILESTIONES"]
         self.end_epoch = data["TRAIN"]["END_EPOCH"]
-        
-        self.input_width = data["MODEL"]["INPUT_WIDTH"]
-        self.input_height = data["MODEL"]["INPUT_HEIGHT"]
-        
         self.category_num = data["MODEL"]["NC"]
         
         print("Load yaml sucess...")

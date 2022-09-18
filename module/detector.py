@@ -26,14 +26,3 @@ class Detector(nn.Module):
         y = self.SPP(P)
 
         return self.detect_head(y)
-
-if __name__ == "__main__":
-    model = Detector(80, False)
-    test_data = torch.rand(1, 3, 352, 352)
-    torch.onnx.export(model,                    #model being run
-                     test_data,                 # model input (or a tuple for multiple inputs)
-                     "./test.onnx",             # where to save the model (can be a file or file-like object)
-                     export_params=True,        # store the trained parameter weights inside the model file
-                     opset_version=11,          # the ONNX version to export the model to
-                     do_constant_folding=True)  # whether to execute constant folding for optimization
-

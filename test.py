@@ -70,8 +70,8 @@ class MiniDetector:
         vis(ori_img, prediction_list)
 
 MiniDetector(
-    model_path= 'data/weights/model.pth',
+    model_path= 'data/weights/50-epoch.pth',
     device= 'cpu',
-    yaml= 'data/coco.yaml',
+    yaml= 'drone_data/drone.yaml',
     confidence= 0.5,
-).object_prediction_list('data/images/dog.jpg')
+).object_prediction_list('drone_data/val/0001.jpg')
