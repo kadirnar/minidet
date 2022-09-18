@@ -70,7 +70,6 @@ class TensorDataset():
         self.img_height = img_height
         self.img_formats = ['bmp', 'jpg', 'jpeg', 'png']
 
-        # 数据检查
         with open(self.path, 'r') as f:
             for line in f.readlines():
                 data_path = line.strip()
