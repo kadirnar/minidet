@@ -38,11 +38,11 @@ class MiniDetector:
         img = torch.from_numpy(img.transpose(0, 3, 1, 2))
         img = img.to(self.device).float() / 255.0
 
-        start = time.perf_counter()
+        start = time.time()
         preds = self.model(img)
-        end = time.perf_counter()
-        time = (end - start) * 1000.
-        print(f"Time: {time:.2f} ms")
+        end = time.time()
+        time = (end - start)
+        print(f"Time: {time:.2f} s, FPS: {1 / time:.2f}")
         output = handle_preds(preds, self.device, self.confidence)
 
         LABEL_NAMES = []
@@ -72,6 +72,6 @@ class MiniDetector:
 MiniDetector(
     model_path= 'data/weights/model.pth',
     device= 'cpu',
-    yaml= 'data/configs/coco.yaml',
+    yaml= 'data/coco.yaml',
     confidence= 0.5,
 ).object_prediction_list('data/images/dog.jpg')

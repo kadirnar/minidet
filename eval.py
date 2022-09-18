@@ -8,7 +8,7 @@ from utils.evaluation import CocoDetectionEvaluator
 
 from module.detector import Detector
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
