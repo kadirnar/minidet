@@ -12,18 +12,16 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--yaml', type=str, default="", help='.yaml config')
-    parser.add_argument('--weight', type=str, default=None, help='.weight config')
-
+    parser.add_argument('--yaml', type=str, default="data/coco.yaml", help='.yaml config')
+    parser.add_argument('--weight', type=str, default="data/weights/model.pth", help='.weight config')
+    
     opt = parser.parse_args()
-    cfg = LoadYaml(opt.yaml)    
-    print(cfg) 
-    print("load weight from:%s"%opt.weight)
+    cfg = LoadYaml(opt.yaml)
     model = Detector(cfg.category_num, True).to(device)
     model.load_state_dict(torch.load(opt.weight))
     model.eval()
 
-    summary(model, input_size=(3, cfg.input_height, cfg.input_width))
+    #summary(model, input_size=(3, cfg.input_height, cfg.input_width))
     evaluation = CocoDetectionEvaluator(cfg.names, device)
     val_dataset = TensorDataset(cfg.val_txt, cfg.input_width, cfg.input_height, False)
     val_dataloader = torch.utils.data.DataLoader(val_dataset,
@@ -37,3 +35,4 @@ if __name__ == '__main__':
 
     print("computer mAP...")
     evaluation.compute_map(val_dataloader, model)
+
